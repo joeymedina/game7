@@ -163,10 +163,10 @@ namespace MonoGameWindowsStarter
 
             /*bounds*/
             // keeps man between the two black bars
-            if (testmanRec.Y < 300)
+            if (testmanRec.Y < 200)
             {
                 //position.Y = 345;
-                testmanRec.Y = 300;
+                testmanRec.Y = 200;
             }
 
             if (testmanRec.Y > 600 - testmanRec.Height)

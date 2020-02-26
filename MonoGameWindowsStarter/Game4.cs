@@ -101,7 +101,7 @@ namespace MonoGameWindowsStarter
             lose = Content.Load<Texture2D>("lose");
 
 
-            finishRect = new Rectangle(925, 400, 100, 200);
+            finishRect = new Rectangle(925, 350, 100, 250);
 
 
 
@@ -164,7 +164,7 @@ namespace MonoGameWindowsStarter
             GraphicsDevice.Clear(Color.AliceBlue);
             spriteBatch.Begin();
 
-            spriteBatch.Draw(texture, new Rectangle(0, 0, 1042, 300), Color.Black);
+            spriteBatch.Draw(texture, new Rectangle(0, 0, 1042, 200), Color.Black);
             spriteBatch.Draw(texture, new Rectangle(0, 600, 1042, 175), Color.Black);
             spriteBatch.Draw(finish, finishRect, Color.Yellow);
             player.Draw(spriteBatch);
@@ -178,7 +178,7 @@ namespace MonoGameWindowsStarter
             }
             
 
-            spriteBatch.DrawString(spriteFont, "SCORE: " + score, new Vector2(850, 300), Color.DeepPink);
+            spriteBatch.DrawString(spriteFont, "SCORE: " + score, new Vector2(850, 200), Color.DeepPink);
             if (won && !lost)
             {
 
