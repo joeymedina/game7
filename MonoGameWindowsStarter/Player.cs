@@ -52,7 +52,7 @@ namespace MonoGameWindowsStarter
         Rectangle manRect;
         
         Texture2D man;
-        Rectangle testmanRec;
+        public Rectangle testmanRec;
         //animation
         Texture2D spriteSheet;
         State state;
@@ -129,6 +129,10 @@ namespace MonoGameWindowsStarter
                 state = State.West;
                 // manRect.X -= 5;
                 testmanRec.X -= (int)(delta * PLAYER_SPEED);
+                game.scoreRect.X -= (int)(delta * PLAYER_SPEED);
+
+                
+
                 //testmanRec.X = (int)position.Y;
             }
             else if (keyboardState.IsKeyDown(Keys.Right))
@@ -136,6 +140,9 @@ namespace MonoGameWindowsStarter
                 state = State.East;
                 // manRect.X += 5;
                 testmanRec.X += (int)(delta * PLAYER_SPEED);
+              
+                game.scoreRect.X += (int)(delta * PLAYER_SPEED);
+
                 //testmanRec.X = (int)position.Y;
             }
             else
@@ -182,10 +189,10 @@ namespace MonoGameWindowsStarter
                 testmanRec.X = 0;
             }
 
-            if ((testmanRec.X > game.GraphicsDevice.Viewport.Width - testmanRec.Width))
+            if (testmanRec.X > 1925)
             {
                 
-                testmanRec.X = game.GraphicsDevice.Viewport.Width - testmanRec.Width;
+                testmanRec.X = 1925;
             }
 
 
@@ -212,7 +219,7 @@ namespace MonoGameWindowsStarter
            
                     score++;
                     PLAYER_SPEED += 100;
-
+                    game.scoreRect = new Vector2(725, 200);
                     n.enemyRect.X = 920;
                     n.enemyRect.Y = n.ran.Next(400, 535);
                     //badmanRect.X = 825;
@@ -223,6 +230,7 @@ namespace MonoGameWindowsStarter
                     {
 
                         isAdded = true;
+                        n.enType = EnemyType.MEDIUM;
 
                     }
                 }

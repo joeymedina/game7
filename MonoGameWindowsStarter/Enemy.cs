@@ -11,10 +11,20 @@ using System.Threading.Tasks;
 
 namespace MonoGameWindowsStarter
 {
+
+
+
+    public enum EnemyType
+    {
+        EASY,
+        MEDIUM,
+        HARD
+
+    }
     public class Enemy: Enemy_Model
     {
         Game4 game;
-
+        public EnemyType enType;
         public Random ran = new Random();
         public Enemy(Game4 game)
         {
@@ -26,11 +36,13 @@ namespace MonoGameWindowsStarter
             enemyRect = new Rectangle();
             if (!game.won)
             {
-                enemyRect.X = 920;
+                enemyRect.X = 1825;
                 enemyRect.Y = ran.Next(175, 535);
                 enemyRect.Width = 55;
                 enemyRect.Height = 55;
             }
+
+            enType = EnemyType.EASY;
 
         }
 
@@ -41,6 +53,7 @@ namespace MonoGameWindowsStarter
         public void LoadContent(ContentManager content)
         {
             badman = content.Load<Texture2D>("badman");
+            badman2 = content.Load<Texture2D>("badman2");
             bounceSFX = content.Load<SoundEffect>("bounce");
         }
 
@@ -52,13 +65,13 @@ namespace MonoGameWindowsStarter
         {
 
             var keyboardState = Keyboard.GetState();
-            if (!game.won && !game.lost) enemyRect.X -= 5;
-           
+            if (!game.won && !game.lost && enType == EnemyType.EASY) enemyRect.X -= 5;
+            if (!game.won && !game.lost && enType == EnemyType.MEDIUM) enemyRect.X -= 7;
 
             if (enemyRect.X < 0)
             {
                 bounceSFX.Play();
-                enemyRect.X = 920;
+                enemyRect.X = 1825;
 
                 enemyRect.Y = ran.Next(175, 535);
             }
@@ -69,13 +82,19 @@ namespace MonoGameWindowsStarter
         {
             //if (!game.won && !game.lost)
             //{}
-            if(enemyRect.X < 915)
+            if(enemyRect.X < 1825 && enType == EnemyType.EASY)
             {
 
              spriteBatch.Draw(badman, enemyRect, Color.White);
             }
 
-            
+            if (enemyRect.X < 1825 && enType == EnemyType.MEDIUM)
+            {
+
+                spriteBatch.Draw(badman2, enemyRect, Color.White);
+            }
+
+
         }
     }
 

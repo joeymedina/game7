@@ -13,6 +13,7 @@ namespace MonoGameWindowsStarter
     {
         public Texture2D badman;
 
+        public Texture2D badman2;
         public SoundEffect bounceSFX;
 
         public Rectangle enemyRect;
