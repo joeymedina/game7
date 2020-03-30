@@ -23,10 +23,10 @@ namespace MonoGameWindowsStarter
     }
     public class Enemy: Enemy_Model
     {
-        Game4 game;
+        Game6 game;
         public EnemyType enType;
         public Random ran = new Random();
-        public Enemy(Game4 game)
+        public Enemy(Game6 game)
         {
             this.game = game;
         }
@@ -36,7 +36,7 @@ namespace MonoGameWindowsStarter
             enemyRect = new Rectangle();
             if (!game.won)
             {
-                enemyRect.X = 1825;
+                enemyRect.X = 900;
                 enemyRect.Y = ran.Next(175, 535);
                 enemyRect.Width = 55;
                 enemyRect.Height = 55;
@@ -71,7 +71,7 @@ namespace MonoGameWindowsStarter
             if (enemyRect.X < 0)
             {
                 bounceSFX.Play();
-                enemyRect.X = 1825;
+                enemyRect.X = 900;
 
                 enemyRect.Y = ran.Next(175, 535);
             }
@@ -82,13 +82,13 @@ namespace MonoGameWindowsStarter
         {
             //if (!game.won && !game.lost)
             //{}
-            if(enemyRect.X < 1825 && enType == EnemyType.EASY)
+            if(enemyRect.X < 900 && enType == EnemyType.EASY)
             {
 
              spriteBatch.Draw(badman, enemyRect, Color.White);
             }
 
-            if (enemyRect.X < 1825 && enType == EnemyType.MEDIUM)
+            if (enemyRect.X < 900 && enType == EnemyType.MEDIUM)
             {
 
                 spriteBatch.Draw(badman2, enemyRect, Color.White);

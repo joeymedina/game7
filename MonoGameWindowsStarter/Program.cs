@@ -14,7 +14,7 @@ namespace MonoGameWindowsStarter
         [STAThread]
         static void Main()
        {
-            using (var game = new Game4())
+            using (var game = new Game6())
                 game.Run();
         }
     }

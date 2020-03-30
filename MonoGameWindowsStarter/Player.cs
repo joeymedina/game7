@@ -43,7 +43,7 @@ namespace MonoGameWindowsStarter
         const int FRAME_HEIGHT = 64;
 
 
-        Game4 game;
+        Game6 game;
 
         public SoundEffect hitSFX;
 
@@ -62,7 +62,7 @@ namespace MonoGameWindowsStarter
         // Vector2 position;
         bool isAdded;
 
-        public Player(Game4 game)
+        public Player(Game6 game)
         {
             this.game = game;
 
@@ -109,14 +109,14 @@ namespace MonoGameWindowsStarter
             
             /*movement*/
             // move up down left right
-            if (keyboardState.IsKeyDown(Keys.Up))
+            if (keyboardState.IsKeyDown(Keys.Up) || keyboardState.IsKeyDown(Keys.W))
             {
                 state = State.North;
                 // manRect.Y -= 5;
                 testmanRec.Y -= (int)(delta * PLAYER_SPEED);
                 
             }
-            else if (keyboardState.IsKeyDown(Keys.Down))
+            else if (keyboardState.IsKeyDown(Keys.Down) || keyboardState.IsKeyDown(Keys.S))
             {
                 state = State.South;
                 // manRect.Y += 5;
@@ -124,24 +124,24 @@ namespace MonoGameWindowsStarter
                 
             }
 
-            else if (keyboardState.IsKeyDown(Keys.Left))
+            else if (keyboardState.IsKeyDown(Keys.Left) || keyboardState.IsKeyDown(Keys.A))
             {
                 state = State.West;
                 // manRect.X -= 5;
                 testmanRec.X -= (int)(delta * PLAYER_SPEED);
-                game.scoreRect.X -= (int)(delta * PLAYER_SPEED);
+                //game.scoreRect.X -= (int)(delta * PLAYER_SPEED);
 
                 
 
                 //testmanRec.X = (int)position.Y;
             }
-            else if (keyboardState.IsKeyDown(Keys.Right))
+            else if (keyboardState.IsKeyDown(Keys.Right) || keyboardState.IsKeyDown(Keys.D))
             {
                 state = State.East;
                 // manRect.X += 5;
                 testmanRec.X += (int)(delta * PLAYER_SPEED);
               
-                game.scoreRect.X += (int)(delta * PLAYER_SPEED);
+                //game.scoreRect.X += (int)(delta * PLAYER_SPEED);
 
                 //testmanRec.X = (int)position.Y;
             }
