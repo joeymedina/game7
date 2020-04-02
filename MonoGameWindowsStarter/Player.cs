@@ -43,7 +43,7 @@ namespace MonoGameWindowsStarter
         const int FRAME_HEIGHT = 64;
 
 
-        Game6 game;
+        Game7 game;
 
         public SoundEffect hitSFX;
 
@@ -62,7 +62,7 @@ namespace MonoGameWindowsStarter
         // Vector2 position;
         bool isAdded;
 
-        public Player(Game6 game)
+        public Player(Game7 game)
         {
             this.game = game;
 

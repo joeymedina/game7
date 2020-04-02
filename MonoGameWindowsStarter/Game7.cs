@@ -10,7 +10,7 @@ namespace MonoGameWindowsStarter
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
-    public class Game6 : Game
+    public class Game7 : Game
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -38,7 +38,7 @@ namespace MonoGameWindowsStarter
         ParticleSystem rainParticle;
         Random random = new Random();
 
-        public Game6()
+        public Game7()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";

@@ -23,10 +23,10 @@ namespace MonoGameWindowsStarter
     }
     public class Enemy: Enemy_Model
     {
-        Game6 game;
+        Game7 game;
         public EnemyType enType;
         public Random ran = new Random();
-        public Enemy(Game6 game)
+        public Enemy(Game7 game)
         {
             this.game = game;
         }
