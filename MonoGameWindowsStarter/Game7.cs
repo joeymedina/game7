@@ -30,12 +30,8 @@ namespace MonoGameWindowsStarter
 
         public bool won;
         public bool lost;
-        ParticleSystem particleSystem;
-        Texture2D particleTexture;
-        Texture2D rain;
-        ParticleSystem finishSystem;
-        Texture2D finishTexture;
-        ParticleSystem rainParticle;
+
+       
         Random random = new Random();
 
         public Game7()
@@ -89,6 +85,74 @@ namespace MonoGameWindowsStarter
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
 
+            var backgroundTexture = Content.Load<Texture2D>("background");
+            var backgroundSprite = new StaticSprite(backgroundTexture);
+            var backgroundLayer = new ParallaxLayer(this);
+            backgroundLayer.Sprites.Add(backgroundSprite);
+            backgroundLayer.DrawOrder = 0;
+            Components.Add(backgroundLayer);
+
+
+            //var playerLayer = new ParallaxLayer(this);
+            //playerLayer.Sprites.Add(player);
+            //playerLayer.DrawOrder = 2;
+            //Components.Add(playerLayer);
+
+
+
+
+            var midgroundTextures = new Texture2D[]
+           {
+                 Content.Load<Texture2D>("midground1"),
+                 Content.Load<Texture2D>("midground2")
+           };
+            var midgroundSprites = new StaticSprite[]
+            {
+                new StaticSprite(midgroundTextures[0]),
+                new StaticSprite(midgroundTextures[1], new Vector2(3500, 0))
+            };
+
+            var midgroundLayer = new ParallaxLayer(this);
+            midgroundLayer.Sprites.AddRange(midgroundSprites);
+            midgroundLayer.DrawOrder = 1;
+
+            Components.Add(midgroundLayer);
+
+            var foregroundTextures = new List<Texture2D>()
+            {
+                Content.Load<Texture2D>("foreground1"),
+                Content.Load<Texture2D>("foreground2"),
+                Content.Load<Texture2D>("foreground3"),
+                Content.Load<Texture2D>("foreground4")
+            };
+
+
+            var foregroundSprites = new List<StaticSprite>();
+            for (int i = 0; i < foregroundTextures.Count; i++)
+            {
+                var position = new Vector2(i * 3500, 0);
+                var sprite = new StaticSprite(foregroundTextures[i], position);
+                foregroundSprites.Add(sprite);
+            }
+
+            var foregroundLayer = new ParallaxLayer(this);
+            foreach (var sprite in foregroundSprites)
+            {
+                foregroundLayer.Sprites.Add(sprite);
+            }
+            foregroundLayer.DrawOrder = 4;
+
+            //var foregroundScrollController = foregroundLayer.ScrollController as AutoScrollController;
+            //foregroundScrollController.Speed = 80f;
+            Components.Add(foregroundLayer);
+
+
+            backgroundLayer.ScrollController = new PlayerTrackingScrollController(player, 0.1f);
+            midgroundLayer.ScrollController = new PlayerTrackingScrollController(player, 0.4f);
+            //playerLayer.ScrollController = new PlayerTrackingScrollController(player, 1.0f);
+            foregroundLayer.ScrollController = new PlayerTrackingScrollController(player, 1.0f);
+
+
 
             player.LoadContent(Content);
 
@@ -109,91 +173,6 @@ namespace MonoGameWindowsStarter
             finishRect = new Rectangle(900, 350, 100, 250);
 
             // TODO: use this.Content to load your game content here
-
-            //PLAYERTAIL
-            particleTexture = Content.Load<Texture2D>("diamond");
-            particleSystem = new ParticleSystem(this.GraphicsDevice, 1000, particleTexture);
-
-            finishTexture = Content.Load<Texture2D>("finishparticle");
-            finishSystem = new ParticleSystem(this.GraphicsDevice, 1000, finishTexture);
-
-            // Set the SpawnParticle method
-            particleSystem.SpawnParticle = (ref Particle particle) =>
-            {
-                //MouseState mouse = Mouse.GetState();
-                particle.Position = new Vector2(player.testmanRec.X + 10, player.testmanRec.Y + 25);
-                particle.Velocity = new Vector2(
-                    MathHelper.Lerp(-50, 50, (float)random.NextDouble()), // X between -50 and 50
-                    MathHelper.Lerp(0, 100, (float)random.NextDouble()) // Y between 0 and 100
-                    );
-                particle.Acceleration = 0.1f * new Vector2(0, (float)-random.NextDouble());
-                particle.Color = Color.Purple;
-                particle.Scale = 1f;
-                particle.Life = 1.0f;
-            };
-            // Set the UpdateParticle method
-            particleSystem.UpdateParticle = (float deltaT, ref Particle particle) =>
-            {
-                particle.Velocity += deltaT * particle.Acceleration;
-                particle.Position += deltaT * particle.Velocity;
-                particle.Scale -= deltaT;
-                particle.Life -= deltaT;
-            };
-            particleSystem.SpawnPerFrame = 6;
-
-            // SMOKE STACK
-            finishSystem.SpawnParticle = (ref Particle particle) =>
-            {
-
-                particle.Position = new Vector2(950, 350);
-                particle.Velocity = new Vector2(
-                    MathHelper.Lerp(-50, 50, (float)random.NextDouble()), // X between -50 and 50
-                    MathHelper.Lerp(0, 100, (float)random.NextDouble()) // Y between 0 and 100
-                    );
-                particle.Acceleration = 0.1f * new Vector2(0, (float)-random.NextDouble());
-                particle.Color = Color.DarkCyan;
-                particle.Scale = 5f;
-                // particle.Life = 3.0f;
-                particle.Life = 3.0f;
-
-
-            };
-
-            finishSystem.UpdateParticle = (float deltaT, ref Particle particle) =>
-            {
-                particle.Velocity += deltaT * particle.Acceleration;
-                particle.Position -= deltaT * particle.Velocity;
-                particle.Scale -= deltaT;
-                particle.Life -= deltaT;
-            };
-            finishSystem.SpawnPerFrame = 4;
-
-            rain = Content.Load<Texture2D>("rain");
-            rainParticle = new ParticleSystem(this.GraphicsDevice, 2000, rain);
-
-            // THE SNOW RAIN
-            rainParticle.SpawnParticle = (ref Particle particle) =>
-            {
-                MouseState mouse = Mouse.GetState();
-                particle.Position = new Vector2(MathHelper.Lerp(0, 950, (float)random.NextDouble()), 0);
-                particle.Velocity = new Vector2(
-                    0, MathHelper.Lerp(0, 200, (float)random.NextDouble()) // Y between 0 and 100
-            );
-                particle.Acceleration = 0.1f * new Vector2(0, (float)-random.NextDouble());
-                particle.Color = Color.DarkSeaGreen;
-                particle.Scale = .2f;
-                particle.Life = 100f;
-            };
-
-
-            rainParticle.UpdateParticle = (float deltaT, ref Particle particle) =>
-            {
-                particle.Velocity += deltaT * particle.Acceleration;
-                particle.Position += deltaT * particle.Velocity;
-                particle.Life -= deltaT;
-            };
-            rainParticle.SpawnPerFrame = 6;
-
 
 
             won = false;
@@ -221,9 +200,7 @@ namespace MonoGameWindowsStarter
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-            rainParticle.Update(gameTime);
-            particleSystem.Update(gameTime);
-            finishSystem.Update(gameTime);
+           
             var keyboardState = Keyboard.GetState();
 
             score = player.score;
@@ -269,9 +246,7 @@ namespace MonoGameWindowsStarter
             //var offset = new Vector2(200, 300) - new Vector2(player.testmanRec.X, player.testmanRec.Y);
             //var t = Matrix.CreateTranslation(offset.X, offset.Y, 0);
             spriteBatch.Begin();
-            rainParticle.Draw();
-            particleSystem.Draw();
-            finishSystem.Draw();
+            
             spriteBatch.Draw(texture, new Rectangle(0, 0, 1942, 200), Color.Black);
             spriteBatch.Draw(texture, new Rectangle(0, 600, 1942, 395), Color.Black);
             spriteBatch.Draw(finish, finishRect, Color.Yellow);
