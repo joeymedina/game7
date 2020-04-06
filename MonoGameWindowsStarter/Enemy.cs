@@ -37,7 +37,7 @@ namespace MonoGameWindowsStarter
             if (!game.won)
             {
                 enemyRect.X = 900;
-                enemyRect.Y = ran.Next(175, 535);
+                enemyRect.Y = ran.Next(575, 835);
                 enemyRect.Width = 55;
                 enemyRect.Height = 55;
             }
@@ -73,7 +73,7 @@ namespace MonoGameWindowsStarter
                 bounceSFX.Play();
                 enemyRect.X = 900;
 
-                enemyRect.Y = ran.Next(175, 535);
+                enemyRect.Y = ran.Next(575, 835);
             }
 
         }

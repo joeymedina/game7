@@ -62,7 +62,7 @@ namespace MonoGameWindowsStarter
 
             graphics.ApplyChanges();
             player.Initialize();
-            scoreRect = new Vector2(850, 200);
+            scoreRect = new Vector2(850, 500);
             score = 0;
 
             foreach (Enemy en in enemies)
@@ -170,7 +170,7 @@ namespace MonoGameWindowsStarter
             lose = Content.Load<Texture2D>("lose");
 
 
-            finishRect = new Rectangle(900, 350, 100, 250);
+            finishRect = new Rectangle(900, 550, 100, 250);
 
             // TODO: use this.Content to load your game content here
 
@@ -248,7 +248,7 @@ namespace MonoGameWindowsStarter
             spriteBatch.Begin();
             
             spriteBatch.Draw(texture, new Rectangle(0, 0, 1942, 200), Color.Black);
-            spriteBatch.Draw(texture, new Rectangle(0, 600, 1942, 395), Color.Black);
+            //spriteBatch.Draw(texture, new Rectangle(0, 600, 1942, 395), Color.Black);
             spriteBatch.Draw(finish, finishRect, Color.Yellow);
             player.Draw(spriteBatch);
 
@@ -262,18 +262,18 @@ namespace MonoGameWindowsStarter
 
 
 
-            spriteBatch.DrawString(spriteFont, "(0.0)/ GET TO THE FINISH -> ", new Vector2(325, 400), Color.Green);
+            spriteBatch.DrawString(spriteFont, "(0.0)/ GET TO THE FINISH -> ", new Vector2(325, 600), Color.Green);
 
             spriteBatch.DrawString(spriteFont, "SCORE: " + score, scoreRect, Color.DeepPink);
             if (won && !lost)
             {
 
-                spriteBatch.DrawString(spriteFont, "YOU WIN WOO HOO!!!!!! \n press R to restart", new Vector2(325, 450), Color.Purple);
+                spriteBatch.DrawString(spriteFont, "YOU WIN WOO HOO!!!!!! \n press R to restart", new Vector2(325, 650), Color.Purple);
             }
             if (lost && !won)
             {
 
-                spriteBatch.DrawString(spriteFont, "YOU LOSE BOO HOO!!!!!! \n press R to restart", new Vector2(325, 450), Color.Red);
+                spriteBatch.DrawString(spriteFont, "YOU LOSE BOO HOO!!!!!! \n press R to restart", new Vector2(325, 650), Color.Red);
             }
 
             spriteBatch.End();

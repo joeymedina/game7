@@ -69,14 +69,14 @@ namespace MonoGameWindowsStarter
             timer = new TimeSpan(0);
             // position = new Vector2(50, 400);
             state = State.Idle;
-            testmanRec = new Rectangle(50, 400, 75, 75);
+            testmanRec = new Rectangle(50, 600, 75, 75);
             
             
         }
 
         public void Initialize()
         {
-            testmanRec = new Rectangle(50, 400, 75, 75);
+            testmanRec = new Rectangle(50, 600, 75, 75);
             score = 0;
             PLAYER_SPEED = 250;
 
@@ -170,16 +170,16 @@ namespace MonoGameWindowsStarter
 
             /*bounds*/
             // keeps man between the two black bars
-            if (testmanRec.Y < 200)
+            if (testmanRec.Y < 450)
             {
                 //position.Y = 345;
-                testmanRec.Y = 200;
+                testmanRec.Y = 450;
             }
 
-            if (testmanRec.Y > 600 - testmanRec.Height)
+            if (testmanRec.Y > 800 - testmanRec.Height)
             {
                 //position.Y = 600 - testmanRec.Height;
-                testmanRec.Y = 600 - testmanRec.Height;
+                testmanRec.Y = 800 - testmanRec.Height;
             }
 
             //keeps man on screen sides
@@ -206,7 +206,7 @@ namespace MonoGameWindowsStarter
                     game.lost = true;
                     game.won = false;
                     n.enemyRect.X = 920;
-                    n.enemyRect.Y = n.ran.Next(400, 535);
+                    n.enemyRect.Y = n.ran.Next(575, 835);
                     badmanRect.X -= 5;
                     //position.X = 50;
                     testmanRec.X = 50;
@@ -219,9 +219,9 @@ namespace MonoGameWindowsStarter
            
                     score++;
                     PLAYER_SPEED += 100;
-                    game.scoreRect = new Vector2(725, 200);
+                    game.scoreRect = new Vector2(825, 500);
                     n.enemyRect.X = 920;
-                    n.enemyRect.Y = n.ran.Next(400, 535);
+                    n.enemyRect.Y = n.ran.Next(575, 835);
                     //badmanRect.X = 825;
                     //badmanRect.X -= 5;
                     // position.X = 50;
@@ -240,7 +240,7 @@ namespace MonoGameWindowsStarter
                     game.won = true;
                     game.lost = false;
                     n.enemyRect.X = 920;
-                    n.enemyRect.Y = n.ran.Next(400, 535);
+                    n.enemyRect.Y = n.ran.Next(575, 835);
                     testmanRec.X = 50;
                 }
             }
